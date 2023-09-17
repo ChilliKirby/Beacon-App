@@ -3,9 +3,16 @@ import { StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+    <View style={styles.mainContainer}>
+      <Text style={styles.textInfo}>ghjhj</Text>
+      <Text style={styles.textInfo}>ghjhj</Text>
+      <Text style={styles.textInfo}>ghjhj</Text>
+      <Text style={styles.textInfo}>ghjg</Text>
+      {/* <MapView style={styles.mapContainer} provider={PROVIDER_GOOGLE}/> */}
+      <MapView
+      style={{width:400,height:200}}
+      provider={PROVIDER_GOOGLE}
+      ></MapView>
     </View>
   );
 }
