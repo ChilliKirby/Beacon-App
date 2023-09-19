@@ -24,7 +24,6 @@
         "backgroundColor": "#ffffff"
       },
       "package": "com.chillikirby.BeaconApp",
-      "googleServicesFile": "./google-services.json",
       "config" : {
         "googleMaps" : {
           "apiKey" : "AIzaSyDQi1ERYg111factYGj4Qgr7OLmNBpfNuk"
