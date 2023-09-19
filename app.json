@@ -15,7 +15,8 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,7 +28,8 @@
         "googleMaps" : {
           "apiKey" : "AIzaSyDQi1ERYg111factYGj4Qgr7OLmNBpfNuk"
         }
-      }
+      },
+      "googleServicesFile": "./google-services.json"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,6 +38,7 @@
       "eas": {
         "projectId": "38ca2447-fce4-4c9d-8c6b-18b70ff633d8"
       }
-    }
+    },
+    "plugins": ["@react-native-google-signin/google-signin"]
   }
 }
