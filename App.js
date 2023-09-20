@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { NavigationContainer } from '@react-navigation/native';
 
 import HomeScene from './Scenes/HomeScene/HomeScene';
+import LoginScene from './Scenes/LoginScene/LoginScene.jsx';
 
 const Tab = createBottomTabNavigator();
 
@@ -17,7 +18,8 @@ export default function App() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Home" component={HomeScene} />
+        <Tab.Screen name="Home" component={ HomeScene } />
+        <Tab.Screen name="Login" component={ LoginScene } />
       </Tab.Navigator>
     </NavigationContainer>
   );
