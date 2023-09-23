@@ -7,6 +7,7 @@ import { NavigationContainer } from '@react-navigation/native';
 
 import HomeScene from './Scenes/HomeScene/HomeScene';
 import LoginScene from './Scenes/LoginScene/LoginScene.jsx';
+import SettingsScene from './Scenes/SettingsScene/SettingsScene.jsx';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
@@ -22,8 +23,9 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Tab.Navigator>
-          <Tab.Screen name="Home" component={HomeScene} />
-          <Tab.Screen name="Login" component={LoginScene} />
+          <Tab.Screen name="Home" component={ HomeScene } />
+          <Tab.Screen name="Login" component={ LoginScene } />
+          <Tab.Screen name="Settings" component={ SettingsScene } />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
