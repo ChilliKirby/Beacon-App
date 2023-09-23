@@ -1,28 +1,31 @@
 import { View, Button } from 'react-native';
 import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setBeaconUser } from '../../State/index.js';
 
 import styles from "../../Styles";
 
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
-import { useRef } from 'react/cjs/react.production.min';
+//import { useRef } from 'react/cjs/react.production.min';
+
 
 const LoginScene = () => {
 
     const [user, setUser] = useState(null);
+    const dispatch = useDispatch();
 
     //Attempt to sign in with Google
     const signInGoogle = async () => {
-        console.log("in sign in google");
+
         try {
             await GoogleSignin.hasPlayServices();
-            
+
             const userInfo = await GoogleSignin.signIn();
             //const userInfo = await getCurrentUser();
-            
-            console.log("after userinfo");
-            console.log(userInfo);
-            setUser( userInfo );
-           
+
+
+            setUser(userInfo);
+
         } catch (error) {
             if (error.code === statusCodes.SIGN_IN_CANCELLED) {
                 // user cancelled the login flow
@@ -50,9 +53,7 @@ const LoginScene = () => {
 
     //Get user details for Beacon and then navigate to home page
     const getUser = async () => {
-        console.log("in get user");
-         console.log(user.idToken);
-         console.log(user.user.email);
+
         try {
             const response = await fetch("http://192.168.86.123:3001/auth/login", {
                 method: "POST",
@@ -67,8 +68,20 @@ const LoginScene = () => {
             })
 
             const loggedIn = await response.json();
-            console.log("befer nick name");
-            console.log(loggedIn);
+
+            if (loggedIn) {
+                ///////////////////////////////////////////todo
+                console.log("sending to setUser");
+                console.log(loggedIn.user.nickName);
+                dispatch(
+                    //setBeaconUser()
+                    setBeaconUser({
+                        nickName: loggedIn.user.nickName,
+
+                    })
+                );
+            }
+
         } catch (error) {
             console.log(error);
 
@@ -76,11 +89,10 @@ const LoginScene = () => {
     }
 
     useEffect(() => {
-      
+
         if (user != null) {
             console.log("mmmmm");
-       console.log(user.user.name);
-       console.log(user.user.email);
+
             getUser(user);
         }
     }, [user]);

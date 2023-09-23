@@ -8,6 +8,9 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScene from './Scenes/HomeScene/HomeScene';
 import LoginScene from './Scenes/LoginScene/LoginScene.jsx';
 
+import { store } from './/State/store.js';
+import { Provider } from 'react-redux';
+
 const Tab = createBottomTabNavigator();
 
 
@@ -16,12 +19,14 @@ export default function App() {
 
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Home" component={ HomeScene } />
-        <Tab.Screen name="Login" component={ LoginScene } />
-      </Tab.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Home" component={HomeScene} />
+          <Tab.Screen name="Login" component={LoginScene} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }
 
