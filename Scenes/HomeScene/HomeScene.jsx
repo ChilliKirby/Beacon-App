@@ -15,7 +15,7 @@ const HomeScene = () => {
             <Text style={styles.mainText}>{nickName}</Text>
             <Text style={styles.mainText}>jkhjhk</Text>
             <Text style={styles.mainText}>jkhjhk</Text>
-            <Text style={styles.mainText}>ghjg</Text>
+            <Text style={styles.mainText}>mmmmm</Text>
             <MapView style={styles.mapContainer} provider={PROVIDER_GOOGLE} />
 
         </View>

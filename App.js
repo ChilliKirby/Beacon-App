@@ -8,6 +8,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import HomeScene from './Scenes/HomeScene/HomeScene';
 import LoginScene from './Scenes/LoginScene/LoginScene.jsx';
 import SettingsScene from './Scenes/SettingsScene/SettingsScene.jsx';
+import ProfileScene from './Scenes/SettingsScene/ProfileScene';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
@@ -26,6 +27,11 @@ export default function App() {
           <Tab.Screen name="Home" component={ HomeScene } />
           <Tab.Screen name="Login" component={ LoginScene } />
           <Tab.Screen name="Settings" component={ SettingsScene } />
+          {/* <Tab.Screen name="Profile" component={ ProfileScene } 
+                      options={{
+                        tabBarButton: ()=>null,
+                        tabBarVisible: false,
+                      }}/> */}
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
