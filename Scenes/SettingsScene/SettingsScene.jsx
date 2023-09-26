@@ -12,7 +12,7 @@ const SettingsScene = ({ navigation }) => {
             <View style={styles.settingsCircleContainer}>
                 {/* <View style={styles.settingsCircle}><Text style={styles.circleText}>Profile</Text></View> */}
                 <Pressable
-                    onPress={navigation.navigate({ProfileScene})}
+                    onPress={() => navigation.navigate('Profile')}
                     style={styles.settingsCircle}
                 >
                     <Text>Profile</Text>

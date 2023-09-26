@@ -46,6 +46,11 @@ export default styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 22,
         color: "#000000"
+    },
+    editText: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: '#72bcd4',
+        alignSelf: 'flex-end',
     }
-
 })

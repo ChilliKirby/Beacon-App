@@ -27,11 +27,11 @@ export default function App() {
           <Tab.Screen name="Home" component={ HomeScene } />
           <Tab.Screen name="Login" component={ LoginScene } />
           <Tab.Screen name="Settings" component={ SettingsScene } />
-          {/* <Tab.Screen name="Profile" component={ ProfileScene } 
+          <Tab.Screen name="Profile" component={ ProfileScene } 
                       options={{
                         tabBarButton: ()=>null,
                         tabBarVisible: false,
-                      }}/> */}
+                      }}/>
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
