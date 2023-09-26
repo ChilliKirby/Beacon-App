@@ -6,8 +6,6 @@ import { setBeaconUser } from '../../State/index.js';
 import styles from "../../Styles";
 
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
-//import { useRef } from 'react/cjs/react.production.min';
-
 
 const LoginScene = () => {
 

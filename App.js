@@ -9,6 +9,7 @@ import HomeScene from './Scenes/HomeScene/HomeScene';
 import LoginScene from './Scenes/LoginScene/LoginScene.jsx';
 import SettingsScene from './Scenes/SettingsScene/SettingsScene.jsx';
 import ProfileScene from './Scenes/SettingsScene/ProfileScene';
+import EditNameScene from './Scenes/SettingsScene/EditNameScene';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
@@ -31,7 +32,14 @@ export default function App() {
                       options={{
                         tabBarButton: ()=>null,
                         tabBarVisible: false,
-                      }}/>
+                      }}
+          />
+          <Tab.Screen name="Edit Name" component={EditNameScene}
+                      options={{
+                        tabBarButton: ()=>null,
+                        tabBarVisible: false,
+                      }}
+          />
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>

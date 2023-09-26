@@ -1,19 +1,38 @@
 import { View, Text, Image, Pressable } from 'react-native';
 import styles from '../../Styles.js';
 
-const ProfileScene = () => {
+const ProfileScene = ({ navigation }) => {
 
 
     return (
         <View style={styles.mainContainer}>
-            <Text style={styles.mainText}>profile</Text>
 
-            <View>
-                <Image style={{ height: 100, width: 100 }} source={{
+            <View style={styles.userPhotoContainer}>
+
+                <Image style={{ flex: 1, height: undefined, width: undefined }} source={{
                     uri: 'https://reactnative.dev/img/tiny_logo.png',
                 }} />
-                <Pressable>
-                    <Text style={styles.editText}>
+                <Pressable
+                    onPress={() => navigation.navigate('')}
+                >
+                    <Text style={styles.editTextButton}>
+                        Edit
+                    </Text>
+                </Pressable>
+
+            </View>
+
+            <View style={styles.textContainer}>
+                <Text 
+                    style={styles.largeMainText}
+                    adjustsFontSizeToFit={true}
+                     >
+                    Name
+                </Text>
+                <Pressable
+                    onPress={() => navigation.navigate('Edit Name')}
+                >
+                    <Text style={styles.editTextButton}>
                         Edit
                     </Text>
                 </Pressable>

@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 
 const GOLDENYELLOW = '#ffdd00';
 
@@ -35,22 +35,59 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
-
+    userPhotoContainer: {
+        flex: 2,
+        margin: 10,
+        width: '80%',
+        height: '40%',
+        borderRadius: 20
+    },
+    textContainer: {
+        flex: 1,
+        width: '60%',
+        margin: 10,
+        backgroundColor: '#ffdd00',
+        borderRadius: 30,
+        alignContent: 'center',
+        justifyContent: 'center'
+    },
+    editTextContainer: {
+        height: '40%',
+        width: '60%',
+        margin: 10,
+        backgroundColor: '#ffdd00',
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignContent: 'center',
+    },
 
     /*Text*/
     mainText: {
         fontSize: 18,
         color: "#fff",
     },
+    largeMainText: {
+        fontSize: 35,
+        color: "#fff",
+        alignSelf: 'center',
+        
+    },
     circleText: {
         fontWeight: 'bold',
         fontSize: 22,
         color: "#000000"
     },
-    editText: {
+    editTextButton: {
         fontWeight: 'bold',
         fontSize: 14,
         color: '#72bcd4',
-        alignSelf: 'flex-end',
+        alignSelf: 'center',
+    },
+    editText: {
+        fontWeight: 'bold',
+        fontSize: 22,
+        alignSelf: 'center',
+        borderBottomColor: '#000000',
+        borderBottomWidth: 1,
     }
 })
