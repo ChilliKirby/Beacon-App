@@ -46,7 +46,9 @@ export default styles = StyleSheet.create({
         flex: 1,
         width: '60%',
         margin: 10,
-        backgroundColor: '#ffdd00',
+        //backgroundColor: '#ffdd00',
+        borderColor: GOLDENYELLOW,
+        borderWidth: 3,
         borderRadius: 30,
         alignContent: 'center',
         justifyContent: 'center'
@@ -55,10 +57,27 @@ export default styles = StyleSheet.create({
         height: '40%',
         width: '60%',
         margin: 10,
-        backgroundColor: '#ffdd00',
+        borderColor: GOLDENYELLOW,
+        borderWidth: 3,
         borderRadius: 30,
         justifyContent: 'center',
         alignContent: 'center',
+        alignItems: 'center'
+    },
+    actionButtonContainerOne: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'center',
+        marginVertical: 20,
+        borderColor: GOLDENYELLOW,
+        borderWidth: 3,
+        borderRadius: 30,
+    },
+    actionButtonContainerTwo: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        margin: 20,
     },
 
     /*Text*/
@@ -77,7 +96,19 @@ export default styles = StyleSheet.create({
         fontSize: 22,
         color: "#000000"
     },
-    editTextButton: {
+    actionTextButtonRight: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: '#72bcd4',
+        alignSelf: 'flex-end',
+    },
+    actionTextButtonLeft: {
+        fontWeight: 'bold',
+        fontSize: 14,
+        color: '#72bcd4',
+        alignSelf: 'flex-start',
+    },
+    actionTextButtonCenter: {
         fontWeight: 'bold',
         fontSize: 14,
         color: '#72bcd4',
@@ -86,8 +117,9 @@ export default styles = StyleSheet.create({
     editText: {
         fontWeight: 'bold',
         fontSize: 22,
-        alignSelf: 'center',
-        borderBottomColor: '#000000',
-        borderBottomWidth: 1,
+        
+        borderBottomColor: '#ffffff',
+        borderBottomWidth: 3,
+        color: '#ffffff',
     }
 })

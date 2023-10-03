@@ -15,7 +15,7 @@ const ProfileScene = ({ navigation }) => {
                 <Pressable
                     onPress={() => navigation.navigate('')}
                 >
-                    <Text style={styles.editTextButton}>
+                    <Text style={styles.actionTextButtonCenter}>
                         Edit
                     </Text>
                 </Pressable>
@@ -23,19 +23,22 @@ const ProfileScene = ({ navigation }) => {
             </View>
 
             <View style={styles.textContainer}>
-                <Text 
+                <Text
                     style={styles.largeMainText}
                     adjustsFontSizeToFit={true}
-                     >
+                >
                     Name
                 </Text>
-                <Pressable
-                    onPress={() => navigation.navigate('Edit Name')}
-                >
-                    <Text style={styles.editTextButton}>
-                        Edit
-                    </Text>
-                </Pressable>
+
+                <View style={styles.actionButtonContainerOne}>
+                    <Pressable
+                        onPress={() => navigation.navigate('Edit Name')}
+                    >
+                        <Text style={styles.actionTextButtonCenter}>
+                            Edit
+                        </Text>
+                    </Pressable>
+                </View>
             </View>
         </View>
     )

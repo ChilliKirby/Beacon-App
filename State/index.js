@@ -19,6 +19,9 @@ const userSlice = createSlice({
             // state.pictureFile = action.payload.pictureFile;
             // state.friends = action.payload.friends;
             // state.tasks = action.payload.tasks;
+        },
+        setBeaconUserName: (state, action) => {
+            
         }
     }
 });
