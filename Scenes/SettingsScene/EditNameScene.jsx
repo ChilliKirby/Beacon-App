@@ -2,11 +2,17 @@ import { View, Text, TextInput, Pressable } from 'react-native';
 import { useState, useEffect } from 'react';
 
 import styles from '../../Styles.js';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setBeaconUserName } from '../../State/index.js';
 
 const EditNameScene = ({ navigation }) => {
 
+    const dispatch = useDispatch();
     const nickName = useSelector((state) => state.user.nickName);
+    const id = useSelector((state) => state.user.id);
+    const token = useSelector((state) => state.user.token);
+
     const [text, onChangeText] = useState(nickName);
 
     console.log("in edit name" + nickName);
@@ -16,6 +22,30 @@ const EditNameScene = ({ navigation }) => {
 
         }
     })
+
+    const patchNickName = async () => {
+        console.log("patch xxxxx is " + id);
+        console.log("token is " + token);
+        const response = await fetch(`http://192.168.86.123:3001/users/nickName/`,
+        {
+            method: "PATCH",
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                nickName: text,
+                id: id,
+            })
+        });
+
+        const data = await response.json();
+        console.log(data);
+
+        dispatch(setBeaconUserName({
+            nickName: data
+        }));
+    }
 
     const onPressCancel = () => {
         onChangeText(nickName);
@@ -48,7 +78,7 @@ const EditNameScene = ({ navigation }) => {
                     </Pressable>
 
                     <Pressable
-                        onPress={onPressCancel}
+                        onPress={patchNickName}
                     >
                         <Text style={styles.actionTextButtonRight}
                         >

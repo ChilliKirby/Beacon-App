@@ -70,12 +70,15 @@ const LoginScene = () => {
             if (loggedIn) {
                 ///////////////////////////////////////////todo
                 console.log("sending to setUser");
-                console.log(loggedIn.user.nickName);
+                console.log(loggedIn.user);
                 dispatch(
                     //setBeaconUser()
                     setBeaconUser({
                         nickName: loggedIn.user.nickName,
-
+                        _id: loggedIn.user._id,
+                        pictureFile: loggedIn.user.picturefile,
+                        friends: loggedIn.user.friends,
+                        token: user.idToken,
                     })
                 );
             }

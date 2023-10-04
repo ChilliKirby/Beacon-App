@@ -2,6 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
     nickName: "",
+    id: "", //id set by mongo db
     token: "",
     pictureFile: "",
     friends: [],
@@ -16,15 +17,19 @@ const userSlice = createSlice({
             console.log("set user set all as ...");
             console.log(action.payload);
             state.nickName = action.payload.nickName;
-            // state.pictureFile = action.payload.pictureFile;
-            // state.friends = action.payload.friends;
+            state.id = action.payload._id,
+            state.pictureFile = action.payload.pictureFile;
+            state.friends = action.payload.friends;
             // state.tasks = action.payload.tasks;
+            state.token = action.payload.token;
+            console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
+            console.log(state.id);
         },
         setBeaconUserName: (state, action) => {
-            
+            state.nickName = action.payload.nickName;
         }
     }
 });
 
-export const { setBeaconUser } = userSlice.actions;
+export const { setBeaconUser, setBeaconUserName } = userSlice.actions;
 export default userSlice.reducer;
