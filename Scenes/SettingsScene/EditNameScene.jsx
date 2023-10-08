@@ -15,8 +15,6 @@ const EditNameScene = ({ navigation }) => {
 
     const [text, onChangeText] = useState(nickName);
 
-    console.log("in edit name" + nickName);
-
     useEffect(() => {
         if (text === "") {
 
@@ -24,8 +22,7 @@ const EditNameScene = ({ navigation }) => {
     })
 
     const patchNickName = async () => {
-        console.log("patch xxxxx is " + id);
-        console.log("token is " + token);
+        
         const response = await fetch(`http://192.168.86.123:3001/users/nickName/`,
         {
             method: "PATCH",
@@ -40,8 +37,7 @@ const EditNameScene = ({ navigation }) => {
         });
 
         const data = await response.json();
-        console.log(data);
-
+        
         dispatch(setBeaconUserName({
             nickName: data
         }));

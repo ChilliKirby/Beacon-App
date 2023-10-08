@@ -10,6 +10,7 @@ import LoginScene from './Scenes/LoginScene/LoginScene.jsx';
 import SettingsScene from './Scenes/SettingsScene/SettingsScene.jsx';
 import ProfileScene from './Scenes/SettingsScene/ProfileScene';
 import EditNameScene from './Scenes/SettingsScene/EditNameScene';
+import EditImageScene from './Scenes/SettingsScene/EditImageScene';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
@@ -35,6 +36,12 @@ export default function App() {
                       }}
           />
           <Tab.Screen name="Edit Name" component={EditNameScene}
+                      options={{
+                        tabBarButton: ()=>null,
+                        tabBarVisible: false,
+                      }}
+          />
+          <Tab.Screen name="Edit Image" component={EditImageScene}
                       options={{
                         tabBarButton: ()=>null,
                         tabBarVisible: false,

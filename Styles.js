@@ -36,11 +36,12 @@ export default styles = StyleSheet.create({
         alignItems: 'center'
     },
     userPhotoContainer: {
-        flex: 2,
+        
         margin: 10,
         width: '80%',
-        height: '40%',
-        borderRadius: 20
+        height: '60%',
+        borderRadius: 20,
+        alignContent: 'center',
     },
     textContainer: {
         flex: 1,
@@ -121,5 +122,11 @@ export default styles = StyleSheet.create({
         borderBottomColor: '#ffffff',
         borderBottomWidth: 3,
         color: '#ffffff',
+    },
+
+    /*Images*/
+    largeProfileImage: {
+        height: '100%',
+        width: '100%',
     }
 })

@@ -9,11 +9,11 @@ const ProfileScene = ({ navigation }) => {
 
             <View style={styles.userPhotoContainer}>
 
-                <Image style={{ flex: 1, height: undefined, width: undefined }} source={{
+                <Image style={styles.largeProfileImage} source={{
                     uri: 'https://reactnative.dev/img/tiny_logo.png',
                 }} />
                 <Pressable
-                    onPress={() => navigation.navigate('')}
+                    onPress={() => navigation.navigate('Edit Image')}
                 >
                     <Text style={styles.actionTextButtonCenter}>
                         Edit

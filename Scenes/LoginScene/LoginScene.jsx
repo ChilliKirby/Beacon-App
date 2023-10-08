@@ -92,8 +92,6 @@ const LoginScene = () => {
     useEffect(() => {
 
         if (user != null) {
-            console.log("mmmmm");
-
             getUser(user);
         }
     }, [user]);
