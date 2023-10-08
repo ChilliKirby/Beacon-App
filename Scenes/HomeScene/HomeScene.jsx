@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Text } from "react-native";
 import { useSelector } from "react-redux";
 
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 
 import styles from '../../Styles.js';
@@ -52,9 +52,13 @@ const HomeScene = () => {
             <MapView
                 style={styles.mapContainer}
                 provider={PROVIDER_GOOGLE}
-
                 region={location}
-            />
+            >
+                <Marker
+                    coordinate={{ latitude: location.latitude, longitude: location.longitude }}
+                    image={{uri: 'https://reactnative.dev/img/tiny_logo.png'}}
+                />
+            </MapView>
 
         </View>
     );
