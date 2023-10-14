@@ -27,9 +27,12 @@ const userSlice = createSlice({
         },
         setBeaconUserName: (state, action) => {
             state.nickName = action.payload.nickName;
+        },
+        setBeaconUserImage: (state, action) => {
+            state.pictureFile = action.payload.pictureFile;
         }
     }
 });
 
-export const { setBeaconUser, setBeaconUserName } = userSlice.actions;
+export const { setBeaconUser, setBeaconUserName, setBeaconUserImage } = userSlice.actions;
 export default userSlice.reducer;

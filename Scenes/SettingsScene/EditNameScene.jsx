@@ -22,25 +22,30 @@ const EditNameScene = ({ navigation }) => {
     })
 
     const patchNickName = async () => {
-        
-        const response = await fetch(`http://192.168.86.123:3001/users/nickName/`,
-        {
-            method: "PATCH",
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                nickName: text,
-                id: id,
-            })
-        });
 
-        const data = await response.json();
-        
-        dispatch(setBeaconUserName({
-            nickName: data
-        }));
+        try {
+            const response = await fetch(`http://192.168.86.123:3001/users/nickName/`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        nickName: text,
+                        id: id,
+                    })
+                });
+
+            const data = await response.json();
+
+            dispatch(setBeaconUserName({
+                nickName: data
+            }));
+
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     const onPressCancel = () => {
