@@ -53,32 +53,32 @@ const EditImageScene = () => {
 
     const patchUserImage = async () => {
 
-        console.log("log");
-        console.log(uri);
-        console.log(type);
-        console.log(name);
         const formData = new FormData();
         formData.append('file', {
             uri: uri,
             type: type,
             name: "ass.jpg",
         });
-        console.log("before fetch " + formData);
+        console.log("before fetch " );
+        console.log(uri);
+        console.log(type);
 
         try {
-            const response = await fetch(`http://192.168.86.123:3001/users/userImage/`,
+            const response = await fetch(`http://192.168.86.123:3001/users/${id}/userImage`,
                 {
                     method: "PATCH",
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        "Content-type": "multipart/form-data",
+                        "Content-Type": "multipart/form-data",
+                        
                     },
                     body: formData
+                    
                 }
             );
             console.log("bbbbb");
             const data = await response.json();
-            console.log("eeee");
+            console.log(data.url);
             // dispatch(setBeaconUserImage({
             //     pictureFile: data,
             // }));
