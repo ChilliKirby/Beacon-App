@@ -128,5 +128,10 @@ export default styles = StyleSheet.create({
     largeProfileImage: {
         height: '100%',
         width: '100%',
+    },
+
+    mapProfileImage: {
+        height: 50,
+        width: 50
     }
 })

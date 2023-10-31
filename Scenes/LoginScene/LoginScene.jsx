@@ -9,6 +9,7 @@ import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-goo
 
 const LoginScene = () => {
 
+     
     const [user, setUser] = useState(null);
     const dispatch = useDispatch();
 
@@ -41,6 +42,13 @@ const LoginScene = () => {
     const signOut = async () => {
         try {
             await GoogleSignin.signOut();
+            dispatch(setBeaconUser({
+                nickName: "",
+                _id: "",
+                pictureFile: "",
+                friends: [],
+                token: "",
+            }))
             console.log("signed out");
 
             //setState({ user: null }); // Remember to remove the user from your app's state as well
@@ -69,14 +77,15 @@ const LoginScene = () => {
 
             if (loggedIn) {
                 ///////////////////////////////////////////todo
-                console.log("sending to setUser");
+                console.log("sending to setUseryyyyyyyyyyyyyyy");
                 console.log(loggedIn.user);
+                console.log(loggedIn.user.pictureFile);
                 dispatch(
                     //setBeaconUser()
                     setBeaconUser({
                         nickName: loggedIn.user.nickName,
                         _id: loggedIn.user._id,
-                        pictureFile: loggedIn.user.picturefile,
+                        pictureFile: loggedIn.user.pictureFile,
                         friends: loggedIn.user.friends,
                         token: user.idToken,
                     })

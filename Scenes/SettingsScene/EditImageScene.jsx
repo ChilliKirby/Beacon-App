@@ -11,6 +11,7 @@ const EditImageScene = () => {
 
     const dispatch = useDispatch();
     const id = useSelector((state) => state.user.id);
+    const userNickName = useSelector((state) => state.user.nickName);
     const token = useSelector((state) => state.user.token);
     const userImage = useSelector((state) => state.user.pictureFile);
     const [image, setImage] = useState(userImage);
@@ -43,7 +44,7 @@ const EditImageScene = () => {
             const fileExtension = uriArray[uriArray.length - 1];
 
             setType(result.assets[0].type + "/" + fileExtension);
-            setName(result.assets[0].fileName);
+            //setName(result.assets[0].fileName);
         }
     };
 
@@ -57,7 +58,7 @@ const EditImageScene = () => {
         formData.append('file', {
             uri: uri,
             type: type,
-            name: "ass.jpg",
+            name: id + "_" + "profile" + "_" + "image" + ".jpg",
         });
         console.log("before fetch " );
         console.log(uri);
@@ -69,19 +70,25 @@ const EditImageScene = () => {
                     method: "PATCH",
                     headers: {
                         Authorization: `Bearer ${token}`,
-                        "Content-Type": "multipart/form-data",
-                        
+                        "Content-Type": "multipart/form-data",                       
                     },
-                    body: formData
-                    
+                    body: formData                    
                 }
             );
             console.log("bbbbb");
             const data = await response.json();
             console.log(data.url);
-            // dispatch(setBeaconUserImage({
-            //     pictureFile: data,
-            // }));
+            
+            //Extra dispatch used to refresh cache of old version
+            //of image due to reuse of uri
+            dispatch((setBeaconUserImage({
+                pictureFile: ""
+            })));
+            dispatch((setBeaconUserImage({
+                pictureFile: data.url
+            })));
+
+            
         } catch (error) {
             console.log(error);
         }
