@@ -3,17 +3,25 @@ import { StyleSheet, Dimensions } from "react-native";
 const GOLDENYELLOW = '#ffdd00';
 
 export default styles = StyleSheet.create({
-    /*Containers*/
+    /*Containers*////////////////////////////////////////
     mainContainer: {
         flex: 1,
         backgroundColor: '#000000',
         alignItems: 'center',
-        justifyContent: 'center',
+        //justifyContent: 'center',
       },
+
+    //Home Screen Containers
     mapContainer: {
         height: '85%',
         width: '100%',
     },
+    friendListContainer: {
+        height: '15%',
+        width: '100%'
+    },
+
+    //Settings Container
     settingsContainer: {
         flex: 1,
         backgroundColor: '#000000',
@@ -129,9 +137,12 @@ export default styles = StyleSheet.create({
         height: '100%',
         width: '100%',
     },
-
     mapProfileImage: {
         height: 50,
         width: 50
+    },
+    friendListProfileImage: {
+        height: '100%',
+        width: '15%'
     }
 })

@@ -13,7 +13,9 @@ const HomeScene = () => {
     const userPictureFile = useSelector((state) => state.user.pictureFile);
     //const [timestamp, setTimeStamp] = useState(null);
     const timestamp = new Date().getTime();
-    const u2 = `${userPictureFile}?t=${timestamp}`;
+
+    //this field is used to update user pic in case of updates to aws s3
+    const userPictureFileWTimestamp = `${userPictureFile}?t=${timestamp}`;
 
     const [location, setLocation] = useState({
         latitude: 140.6717733,
@@ -23,7 +25,7 @@ const HomeScene = () => {
     });
     const [errorMsg, setErrorMsg] = useState(null);
 
-    
+
 
     useEffect(() => {
         //setTimeStamp(new Date().getTime());
@@ -46,10 +48,12 @@ const HomeScene = () => {
 
     return (
         <View style={styles.mainContainer}>
-            <Text style={styles.mainText}>{u2}</Text>
-            <Image 
-            key={useSelector((state) => state.user.pictureFile)}
-            source= {{uri: u2 }} height={50} width={50}></Image>
+            <View style={styles.friendListContainer}>
+                <Image
+                    style={styles.friendListProfileImage}
+                    source={{ uri: userPictureFileWTimestamp }}>
+                </Image>
+            </View>
             <MapView
                 style={styles.mapContainer}
                 provider={PROVIDER_GOOGLE}
@@ -68,7 +72,7 @@ const HomeScene = () => {
                         <View>
                             <Image
                                 style={styles.mapProfileImage}
-                                source={{ uri:  u2 }}>
+                                source={{ uri: userPictureFileWTimestamp }}>
                             </Image>
                         </View>
                     </Marker>

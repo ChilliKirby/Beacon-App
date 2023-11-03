@@ -29,7 +29,14 @@ const userSlice = createSlice({
             state.nickName = action.payload.nickName;
         },
         setBeaconUserImage: (state, action) => {
+            if(state.user){
             state.pictureFile = action.payload.pictureFile;
+            } else {
+                console.error("no user found");
+            }
+        },
+        setFriends: (state, action) => {
+            state.friends = action.payload.friends;
         }
     }
 });

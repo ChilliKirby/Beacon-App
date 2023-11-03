@@ -11,6 +11,7 @@ import SettingsScene from './Scenes/SettingsScene/SettingsScene.jsx';
 import ProfileScene from './Scenes/SettingsScene/ProfileScene';
 import EditNameScene from './Scenes/SettingsScene/EditNameScene';
 import EditImageScene from './Scenes/SettingsScene/EditImageScene';
+import SearchFriend from './Scenes/SettingsScene/SearchFriend';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
@@ -46,6 +47,9 @@ export default function App() {
                         tabBarButton: ()=>null,
                         tabBarVisible: false,
                       }}
+          />
+          <Tab.Screen name="Friend Search" component={SearchFriend}
+                      
           />
         </Tab.Navigator>
       </NavigationContainer>
