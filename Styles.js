@@ -51,6 +51,8 @@ export default styles = StyleSheet.create({
         borderRadius: 20,
         alignContent: 'center',
     },
+
+    //misc containers
     textContainer: {
         flex: 1,
         width: '60%',
@@ -72,6 +74,10 @@ export default styles = StyleSheet.create({
         justifyContent: 'center',
         alignContent: 'center',
         alignItems: 'center'
+    },
+    searchBarContainer: {
+        height: '20%',
+        width: '60%',
     },
     actionButtonContainerOne: {
         width: '100%',
