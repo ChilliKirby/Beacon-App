@@ -52,7 +52,7 @@ export default styles = StyleSheet.create({
         alignContent: 'center',
     },
 
-    //misc containers
+    //misc containers//////////////////////////////////////////////
     textContainer: {
         flex: 1,
         width: '60%',
@@ -79,6 +79,11 @@ export default styles = StyleSheet.create({
         height: '20%',
         width: '60%',
     },
+    searchResultsFlatlistContainer: {
+        height: '90%',
+        width: '90%',
+        backgroundColor: '#47e',
+    },
     actionButtonContainerOne: {
         width: '100%',
         flexDirection: 'row',
@@ -94,8 +99,16 @@ export default styles = StyleSheet.create({
         justifyContent: 'space-around',
         margin: 20,
     },
+    flatListItemContainer: {
+        height: 80,
+        width: '100%',
+        flexDirection: 'row',
+        backgroundColor: '#444',
+        margin: 5,
+        
+    },
 
-    /*Text*/
+    /*Text*////////////////////////////////////////////////////
     mainText: {
         fontSize: 18,
         color: "#fff",
@@ -138,7 +151,7 @@ export default styles = StyleSheet.create({
         color: '#ffffff',
     },
 
-    /*Images*/
+    /*Images*//////////////////////////////////////////////
     largeProfileImage: {
         height: '100%',
         width: '100%',

@@ -90,7 +90,7 @@ const EditImageScene = () => {
 
             
         } catch (error) {
-            console.log(error);
+            console.log(error + "in edit image scene");
         }
     }
 
