@@ -12,6 +12,7 @@ import ProfileScene from './Scenes/SettingsScene/ProfileScene';
 import EditNameScene from './Scenes/SettingsScene/EditNameScene';
 import EditImageScene from './Scenes/SettingsScene/EditImageScene';
 import SearchFriend from './Scenes/SettingsScene/SearchFriend';
+import ViewProfileScene from './Scenes/ViewProfileScene/ViewProfileScene';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
@@ -50,6 +51,9 @@ export default function App() {
           />
           <Tab.Screen name="Friend Search" component={SearchFriend}
                       
+          />
+          <Tab.Screen name="View Profile" component={ViewProfileScene}
+              
           />
         </Tab.Navigator>
       </NavigationContainer>

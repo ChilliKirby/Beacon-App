@@ -7,6 +7,9 @@ const initialState = {
     pictureFile: "",
     friends: [],
     tasks: [],
+
+    profileViewNickName: "",
+    profileViewPictureFile: "",
 };
 
 const userSlice = createSlice({
@@ -37,6 +40,10 @@ const userSlice = createSlice({
         },
         setFriends: (state, action) => {
             state.friends = action.payload.friends;
+        },
+        setViewProfile: (state, action) => {
+            state.profileViewNickName = action.payload.nickName;
+            state.profileViewPictureFile = action.payload.pictureFile;
         }
     }
 });

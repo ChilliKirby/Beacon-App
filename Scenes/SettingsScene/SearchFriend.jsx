@@ -4,8 +4,10 @@ import { useState } from "react";
 import { useSelector } from "react-redux";
 
 import { SearchBar } from '@rneui/themed';
+import { Pressable } from "react-native";
 
-const SearchFriend = () => {
+
+const SearchFriend = ({ navigation }) => {
 
     const [userName, setUserName] = useState("");
     const [dataResults, setDataResults] = useState(null);
@@ -38,9 +40,16 @@ const SearchFriend = () => {
     const Item = ({ nickName, image }) => (
         <View style={styles.flatListItemContainer}>
             <Image style={styles.friendListProfileImage} source={{ uri: image }} />
-            <View style={{ justifyContent: 'center', margin: 5 }}>
-                <Text style={styles.mainText}>{nickName}</Text>
-            </View>
+
+            <Pressable
+                onPress={() => {
+                    navigation.navigate("View Profile", {nickName: nickName, pictureFile: image});
+                }}
+            >
+                <View style={{ justifyContent: 'center', margin: 5 }}>
+                    <Text style={styles.mainText}>{nickName}</Text>
+                </View>
+            </Pressable>
         </View>
     );
 
