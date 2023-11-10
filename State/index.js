@@ -40,6 +40,7 @@ const userSlice = createSlice({
         },
         setFriends: (state, action) => {
             state.friends = action.payload.friends;
+            console.log(state.friends);
         },
         setViewProfile: (state, action) => {
             state.profileViewNickName = action.payload.nickName;
@@ -48,5 +49,5 @@ const userSlice = createSlice({
     }
 });
 
-export const { setBeaconUser, setBeaconUserName, setBeaconUserImage } = userSlice.actions;
+export const { setBeaconUser, setBeaconUserName, setBeaconUserImage, setFriends } = userSlice.actions;
 export default userSlice.reducer;

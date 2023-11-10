@@ -46,8 +46,8 @@ export default styles = StyleSheet.create({
     userPhotoContainer: {
         
         margin: 10,
-        width: '80%',
-        height: '60%',
+        width: '40%',
+        height: '40%',
         borderRadius: 20,
         alignContent: 'center',
     },
@@ -63,6 +63,21 @@ export default styles = StyleSheet.create({
         borderRadius: 30,
         alignContent: 'center',
         justifyContent: 'center'
+    },
+    viewProfileInfoContainer: {
+        //flex: 1,
+        flexDirection: 'row',
+        height: '20%',
+        width: '80%',
+        margin: 10,
+        //backgroundColor: '#ffdd00',
+        borderColor: GOLDENYELLOW,
+        borderWidth: 3,
+        borderRadius: 30,
+        alignContent: 'space-around',
+        alignItems:'center',
+        justifyContent:'space-between',
+        padding: 10,
     },
     editTextContainer: {
         height: '40%',
@@ -118,6 +133,11 @@ export default styles = StyleSheet.create({
         color: "#fff",
         alignSelf: 'center',
         
+    },
+    largeMainTextLeft: {
+        fontSize: 35,
+        color: "#fff",
+        margin: 10,
     },
     circleText: {
         fontWeight: 'bold',

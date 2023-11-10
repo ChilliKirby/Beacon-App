@@ -1,7 +1,7 @@
 import { View, FlatList, Text, Image } from "react-native";
 import styles from "../../Styles.js";
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { SearchBar } from '@rneui/themed';
 import { Pressable } from "react-native";
@@ -12,6 +12,8 @@ const SearchFriend = ({ navigation }) => {
     const [userName, setUserName] = useState("");
     const [dataResults, setDataResults] = useState(null);
     const token = useSelector((state) => state.user.token);
+
+    const dispatch = useDispatch();
 
     const handleSearch = async () => {
 
@@ -37,13 +39,13 @@ const SearchFriend = ({ navigation }) => {
         }
     };
 
-    const Item = ({ nickName, image }) => (
+    const Item = ({ nickName, image, friendId }) => (
         <View style={styles.flatListItemContainer}>
             <Image style={styles.friendListProfileImage} source={{ uri: image }} />
 
             <Pressable
                 onPress={() => {
-                    navigation.navigate("View Profile", {nickName: nickName, pictureFile: image});
+                    navigation.navigate("View Profile", { nickName: nickName, pictureFile: image, id: friendId });
                 }}
             >
                 <View style={{ justifyContent: 'center', margin: 5 }}>
@@ -72,7 +74,7 @@ const SearchFriend = ({ navigation }) => {
                     <FlatList
 
                         data={dataResults}
-                        renderItem={({ item }) => <Item nickName={item.nickName} image={item.pictureFile} />}
+                        renderItem={({ item }) => <Item nickName={item.nickName} image={item.pictureFile} friendId={item.id} />}
                     />
                 </View>
             }
