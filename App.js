@@ -13,9 +13,11 @@ import EditNameScene from './Scenes/SettingsScene/EditNameScene';
 import EditImageScene from './Scenes/SettingsScene/EditImageScene';
 import SearchFriend from './Scenes/SettingsScene/SearchFriend';
 import ViewProfileScene from './Scenes/ViewProfileScene/ViewProfileScene';
+import FriendRequest from './Scenes/SettingsScene/FriendRequest';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -55,6 +57,10 @@ export default function App() {
           <Tab.Screen name="View Profile" component={ViewProfileScene}
               
           />
+          <Tab.Screen name="Friend Requests" component={FriendRequest}
+
+          />
+
         </Tab.Navigator>
       </NavigationContainer>
     </Provider>
