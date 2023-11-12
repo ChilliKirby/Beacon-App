@@ -45,11 +45,12 @@ const SearchFriend = ({ navigation }) => {
 
             <Pressable
                 onPress={() => {
-                    navigation.navigate("View Profile", { nickName: nickName, pictureFile: image, id: friendId });
+                    navigation.navigate("View Profile", { nickName: nickName, pictureFile: image, friendId: friendId });
                 }}
             >
                 <View style={{ justifyContent: 'center', margin: 5 }}>
                     <Text style={styles.mainText}>{nickName}</Text>
+                    <Text style={styles.mainText}>{friendId}</Text>
                 </View>
             </Pressable>
         </View>
@@ -63,6 +64,7 @@ const SearchFriend = ({ navigation }) => {
                     onChangeText={setUserName}
                     value={userName}
                     onEndEditing={handleSearch}
+                    
                 >
 
                 </SearchBar>
@@ -74,7 +76,7 @@ const SearchFriend = ({ navigation }) => {
                     <FlatList
 
                         data={dataResults}
-                        renderItem={({ item }) => <Item nickName={item.nickName} image={item.pictureFile} friendId={item.id} />}
+                        renderItem={({ item }) => <Item nickName={item.nickName} image={item.pictureFile} friendId={item._id} />}
                     />
                 </View>
             }

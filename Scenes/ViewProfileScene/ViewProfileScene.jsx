@@ -13,15 +13,16 @@ const ViewProfileScene = () => {
     const route = useRoute();
     const { nickName, pictureFile, friendId } = route.params;
     const token = useSelector((state) => state.user.token);
-    const id = useSelector((state) => state.user.id);
+    const userId = useSelector((state) => state.user.id);
 
     const dispatch = useDispatch();
 
     const handleAddRemoveFriend = async() => {
         console.log("handle add remove");
+        console.log(userId);
 
         try{
-            const response = await fetch(`http://192.168.86.123:3001/users/${id}/${friendId}/addRemoveFriend`,
+            const response = await fetch(`http://192.168.86.123:3001/users/${userId}/${friendId}/addRemoveFriend`,
             {
                 method: "PATCH",
                 headers: {
@@ -33,7 +34,7 @@ const ViewProfileScene = () => {
 
             const data = await response.json();
 
-            dispatch(setFriends({ friends: data }));
+            // dispatch(setFriends({ friends: data }));
             
         } catch(error){
             console.log(error);

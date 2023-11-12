@@ -88,6 +88,8 @@ const LoginScene = () => {
                         pictureFile: loggedIn.user.pictureFile,
                         friends: loggedIn.user.friends,
                         token: user.idToken,
+                        bio: loggedIn.user.bio,
+                        friendRequests: loggedIn.user.friendRequests,
                     })
                 );
             }

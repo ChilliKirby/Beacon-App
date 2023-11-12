@@ -7,6 +7,8 @@ const initialState = {
     pictureFile: "",
     friends: [],
     tasks: [],
+    bio: [],
+    friendRequests: [],
 
     profileViewNickName: "",
     profileViewPictureFile: "",
@@ -23,6 +25,8 @@ const userSlice = createSlice({
             state.id = action.payload._id,
             state.pictureFile = action.payload.pictureFile;
             state.friends = action.payload.friends;
+            state.bio = action.payload.bio;
+            state.friendRequests = action.payload.friendRequests;
             // state.tasks = action.payload.tasks;
             state.token = action.payload.token;
             console.log("yyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
