@@ -7,7 +7,7 @@ export default styles = StyleSheet.create({
     mainContainer: {
         flex: 1,
         backgroundColor: '#000000',
-        alignItems: 'center',
+        // alignItems: 'center',
         //justifyContent: 'center',
       },
 
@@ -115,13 +115,16 @@ export default styles = StyleSheet.create({
         margin: 20,
     },
     flatListItemContainer: {
-        height: 80,
-        width: '100%',
+        backgroundColor: '#f9c2ff',
+        // padding: 10,
+        // marginVertical: 2,
+        // marginHorizontal: 2,
+        height: 100,
+        width: '90%',
         flexDirection: 'row',
-        backgroundColor: '#444',
-        margin: 5,
-        
+        alignSelf: 'center'
     },
+   
 
     /*Text*////////////////////////////////////////////////////
     mainText: {
@@ -170,6 +173,12 @@ export default styles = StyleSheet.create({
         borderBottomWidth: 3,
         color: '#ffffff',
     },
+    flatListItemText: {
+        fontSize: 18,
+        color: "#fff",
+        alignSelf: 'center',
+        margin: 3,
+    },
 
     /*Images*//////////////////////////////////////////////
     largeProfileImage: {
@@ -183,5 +192,11 @@ export default styles = StyleSheet.create({
     friendListProfileImage: {
         height: '100%',
         width: '15%'
-    }
+    },
+    flatListItemImage: {
+        height: '95%',
+        width: '20%',
+        padding: 2
+    },
+   
 })
