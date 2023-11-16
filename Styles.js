@@ -124,6 +124,10 @@ export default styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'center'
     },
+    flatListItemButton: {
+        alignSelf:'center',
+               
+    },
    
 
     /*Text*////////////////////////////////////////////////////
