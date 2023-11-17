@@ -6,7 +6,8 @@ export default styles = StyleSheet.create({
     /*Containers*////////////////////////////////////////
     mainContainer: {
         flex: 1,
-        backgroundColor: '#000000',
+        backgroundColor: '#456',
+        //height: '100%'
         // alignItems: 'center',
         //justifyContent: 'center',
       },
@@ -115,7 +116,7 @@ export default styles = StyleSheet.create({
         margin: 20,
     },
     flatListItemContainer: {
-        backgroundColor: '#f9c2ff',
+        backgroundColor: '#000',
         // padding: 10,
         // marginVertical: 2,
         // marginHorizontal: 2,
@@ -128,7 +129,21 @@ export default styles = StyleSheet.create({
         alignSelf:'center',
                
     },
-   
+   horizontalFriendFlatList: {
+    backgroundColor: '#f9c2ff',
+    // padding: 10,
+    // marginVertical: 2,
+    // marginHorizontal: 2,
+    height: 100,
+    width: '90%',
+    flexDirection: 'row',
+    alignSelf: 'center',
+   },
+   verticalFriendsFlatList: {
+    height: "100%",
+    width: '90%',
+    backgroundColor: '#555',
+   },
 
     /*Text*////////////////////////////////////////////////////
     mainText: {

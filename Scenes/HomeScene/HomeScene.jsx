@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FlatList } from 'react';
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useSelector } from "react-redux";
 
@@ -7,10 +7,12 @@ import * as Location from 'expo-location';
 
 import styles from '../../Styles.js';
 
+
 const HomeScene = () => {
 
     const nickName = useSelector((state) => state.user.nickName);
     const userPictureFile = useSelector((state) => state.user.pictureFile);
+    const friends = useSelector((state) => state.user.friends);
     //const [timestamp, setTimeStamp] = useState(null);
     const timestamp = new Date().getTime();
 
@@ -24,6 +26,14 @@ const HomeScene = () => {
         longitudeDelta: 0.0421,
     });
     const [errorMsg, setErrorMsg] = useState(null);
+
+    // const item = ({}) => (
+    //     // <View style={styles.flatListItemContainer}>
+    //     //     <Image 
+    //     //         style={styles.horizontalFriendFlatList}
+    //     //         source={{uri : }}
+    //     // </View>
+    // )
 
 
 
@@ -48,12 +58,19 @@ const HomeScene = () => {
 
     return (
         <View style={styles.mainContainer}>
-            <View style={styles.friendListContainer}>
+            {/* <View style={styles.friendListContainer}>
                 <Image
                     style={styles.friendListProfileImage}
                     source={{ uri: userPictureFileWTimestamp }}>
                 </Image>
-            </View>
+                <FlatList
+                    data={friends}
+                    renderItem={({item}) => <Item></Item>}
+                    
+                >
+
+                </FlatList>
+            </View> */}
             <MapView
                 style={styles.mapContainer}
                 provider={PROVIDER_GOOGLE}

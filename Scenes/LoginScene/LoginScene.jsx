@@ -1,7 +1,7 @@
 import { View, Button } from 'react-native';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { setBeaconUser } from '../../State/index.js';
+import { setBeaconUser, setLogOut } from '../../State/index.js';
 
 import styles from "../../Styles";
 
@@ -42,13 +42,22 @@ const LoginScene = () => {
     const signOut = async () => {
         try {
             await GoogleSignin.signOut();
-            dispatch(setBeaconUser({
-                nickName: "",
-                _id: "",
-                pictureFile: "",
-                friends: [],
-                token: "",
-            }))
+            // dispatch(setBeaconUser({
+            //     nickName: "",
+            //     id: "",
+            //     pictureFile: "",
+            //     friends: [],
+            //     token: "",
+            //     tasks: [],
+            //     bio: "",
+            //     friendRequests: [],
+
+            //     profileViewNickName: "",
+            //     profileViewPictureFile: "",
+
+               
+            // }))
+            dispatch(setLogOut());
             console.log("signed out");
 
             //setState({ user: null }); // Remember to remove the user from your app's state as well
@@ -84,7 +93,7 @@ const LoginScene = () => {
                     //setBeaconUser()
                     setBeaconUser({
                         nickName: loggedIn.user.nickName,
-                        _id: loggedIn.user._id,
+                        id: loggedIn.user._id,
                         pictureFile: loggedIn.user.pictureFile,
                         friends: loggedIn.user.friends,
                         token: user.idToken,
