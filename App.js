@@ -37,7 +37,11 @@ export default function App() {
                       options={{
                         tabBarButton: ()=>null,
                         tabBarVisible: false,
+                        unmountOnBlur: true,
                       }}
+                      // listeners={({navigation}) => ({
+                      //   blur: () => navigation.setParams({ screen: undefined })
+                      // })}
           />
           <Tab.Screen name="Edit Name" component={EditNameScene}
                       options={{

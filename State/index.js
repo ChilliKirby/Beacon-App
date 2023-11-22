@@ -6,6 +6,7 @@ const initialState = {
     token: "",
     pictureFile: "",
     friends: [],
+    friendsObjects: null,
     tasks: [],
     bio: "",
     friendRequests: [],
@@ -36,15 +37,16 @@ const userSlice = createSlice({
             console.log(state.friends);
         },
         setLogOut : (state, action) => {
-            state.nickName = initialState.nickName;
-            state.id = initialState.id;
-            state.token = initialState.token;
-            state.friends = initialState.friends;
+            state.nickName = null;
+            state.id = null;
+            state.token = null;
+            state.friends = null;
+            state.friendsObjects = null;
             console.log("log outtttt");
             console.log(state.id);
             console.log(state.token);
             console.log(state.nickName);
-            console.log(state.friends);
+            console.log(state.friendsObjects);
         },
         setBeaconUserName: (state, action) => {
             state.nickName = action.payload.nickName;
@@ -56,9 +58,10 @@ const userSlice = createSlice({
                 console.error("no user found");
             }
         },
-        setFriends: (state, action) => {
-            state.friends = action.payload.friends;
-            console.log(state.friends);
+        setFriendsObjects: (state, action) => {
+            console.log("erase");
+            state.friendsObjects = action.payload.friendsObjects;
+            console.log(state.friendsObjects);
         },
         setViewProfile: (state, action) => {
             state.profileViewNickName = action.payload.nickName;
@@ -67,5 +70,5 @@ const userSlice = createSlice({
     }
 });
 
-export const { setBeaconUser, setBeaconUserName, setBeaconUserImage, setFriends, setViewProfile, setLogOut } = userSlice.actions;
+export const { setBeaconUser, setBeaconUserName, setBeaconUserImage, setFriendsObjects, setViewProfile, setLogOut } = userSlice.actions;
 export default userSlice.reducer;

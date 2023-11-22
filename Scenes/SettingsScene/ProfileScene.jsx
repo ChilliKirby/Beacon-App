@@ -2,25 +2,32 @@ import { View, Text, Image, Pressable, FlatList } from 'react-native';
 import styles from '../../Styles.js';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFriends } from '../../State/index.js';
+import { setFriendsObjects } from '../../State/index.js';
 
 
 const ProfileScene = ({ navigation }) => {
 
-    const [friends, setFriends] = useState();
+    //const [friends, setFriends] = useState();
     const [refresh, setRefresh] = useState(true);
 
     const id = useSelector((state) => state.user.id);
     const token = useSelector((state) => state.user.token);
-    //const friends = useSelector((state) => state.user.friends);
+    const friendsObjects = useSelector((state) => state.user.friendsObjects);
     const nickName = useSelector((state) => state.user.nickName);
 
     const dispatch = useDispatch();
 
     const getFriends = async () => {
 
-        if(refresh){
+        console.log("55555555555555555555555555555555");
+        console.log("token before getfriends is " + nickName);
+        console.log("token before getfriends is " + id);
+        console.log("token before getfriends is " + token);
+        console.log("token before getfriends is " + friendsObjects);
+
+        // if(refresh){
         const response = await fetch(`http://192.168.86.123:3001/users/${id}/friends`,
+            
             {
                 method: "GET",
                 headers: {
@@ -34,16 +41,16 @@ const ProfileScene = ({ navigation }) => {
         console.log("jklkjkljj");
         console.log(nickName);
         console.log("ppppppppp");
-        console.log(id);
-        // dispatch((setFriends({
-        //     friends: data
-        // })));
-        //setRefresh(false);
-        setFriends(data);
-        console.log(friends);
-    } else{
+        //console.log(data);
+        dispatch((setFriendsObjects({
+            friendsObjects: data
+        })));
+        //setRefresh(false);//
+        // setFriends(data);
+        // console.log(friends);
+    // } else{
 
-    }
+    // }
         //setFriends(data);
     }
 
@@ -54,26 +61,27 @@ const ProfileScene = ({ navigation }) => {
 
         </View>
     )
-    //
+    ////
 
-    const check = () => {
-        console.log("check");
-        if(!friends){
-            getFriends();
-        }
-    }
+    // const check = () => {
+    //     console.log("check");
+    //     if(!friends){
+    //         getFriends();
+    //     }
+    // }
 
     useEffect(() => {
         // const unsubscribe = navigation.addListener('focus', () => {
           // Place your refresh logic here
-          console.log('Screen is focused, refreshing...');
-          
-          getFriends();
+          //console.log('Screen is focused, refreshing...');
+          //setRefresh(!refresh);
+           getFriends();
           //Trigger the data refresh or any other necessary actions
        // });//
-    
+        //console.log("fiinfifnifndsifnd");
+        //getFriends();
         // return unsubscribe;
-      }, []);
+      }, [navigation]);
 
     // useEffect(() => {
         
@@ -151,7 +159,7 @@ const ProfileScene = ({ navigation }) => {
 
             <View style={{ height: '60%', backgroundColor: '#339' }}>
 
-                {friends && (
+                {friendsObjects && (
                 // <FlatList
                 //     data={friends}
                 //     renderItem={({ item }) => <Item nickName={item.nickName} pictureFile={item.pictureFile} friendId={item.id} />}
@@ -160,7 +168,7 @@ const ProfileScene = ({ navigation }) => {
                 // />
 
                 <FlatList
-                   data={friends}
+                   data={friendsObjects}
                    renderItem={({ item }) => <Item nickName={item.nickName} pictureFile={item.pictureFile} friendId={item.id} />}
                 // renderItem={(item) => <Item nickName={item.nickName} image={item.pictureFile} friendId={item.id} />}
                    keyExtractor={item => item.id}

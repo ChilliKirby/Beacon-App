@@ -1,13 +1,18 @@
-import { View, Button } from 'react-native';
+import { View, Button, Text } from 'react-native';
 import { useState, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setBeaconUser, setLogOut } from '../../State/index.js';
 
 import styles from "../../Styles";
 
 import { GoogleSignin, GoogleSigninButton, statusCodes } from '@react-native-google-signin/google-signin';
 
-const LoginScene = () => {
+const LoginScene = ({ navigation }) => {
+
+    // const n = useSelector((state) => state.user.nickName);
+    // const nn = useSelector((state) => state.user.id);
+    // const nnn = useSelector((state) => state.user.token);
+    // const nnnn = useSelector((state) => state.user.friendsObjects);
 
      
     const [user, setUser] = useState(null);
@@ -101,6 +106,8 @@ const LoginScene = () => {
                         friendRequests: loggedIn.user.friendRequests,
                     })
                 );
+
+                navigation.navigate('Home');
             }
 
         } catch (error) {
@@ -133,6 +140,14 @@ const LoginScene = () => {
             />
 
             <Button title={"out"} onPress={signOut} >out</Button>
+
+            {/* {n && nn && nnn && 
+            <View style={styles.mainContainer}>
+            <Text styles={styles.mainText}> {n}</Text>
+            <Text styles={styles.mainText}> {nn}</Text>
+            <Text styles={styles.mainText}> {nnnn[0].nickName}</Text>
+            </View>
+} */}
         </View>
     )
 };

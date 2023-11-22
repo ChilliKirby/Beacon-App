@@ -9,7 +9,7 @@ import styles from '../../Styles.js';
 
 
 const HomeScene = () => {
-
+    
     const nickName = useSelector((state) => state.user.nickName);
     const userPictureFile = useSelector((state) => state.user.pictureFile);
     const friends = useSelector((state) => state.user.friends);
