@@ -1,19 +1,25 @@
 import React, { useState, useEffect, FlatList } from 'react';
-import { StyleSheet, View, Text, Image } from "react-native";
-import { useSelector } from "react-redux";
+import { StyleSheet, View, Text, Image, Pressable } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import Icon from 'react-native-vector-icons/Feather.js';
 
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import * as Location from 'expo-location';
 
+import { setFriendsObjects } from '../../State/index.js';
 import styles from '../../Styles.js';
 
 
 const HomeScene = () => {
-    
+
+    const id = useSelector((state) => state.user.id);
+    const token = useSelector((state) => state.user.token);
     const nickName = useSelector((state) => state.user.nickName);
     const userPictureFile = useSelector((state) => state.user.pictureFile);
-    const friends = useSelector((state) => state.user.friends);
-    //const [timestamp, setTimeStamp] = useState(null);
+    const friendsObjects = useSelector((state) => state.user.friendsObjects);
+
+    const dispatch = useDispatch();
+
     const timestamp = new Date().getTime();
 
     //this field is used to update user pic in case of updates to aws s3
@@ -36,6 +42,30 @@ const HomeScene = () => {
     // )
 
 
+    // const getFriends = async () => {
+
+    //     const response = await fetch(`http://192.168.86.123:3001/users/${id}/friends`,
+
+    //         {
+    //             method: "GET",
+    //             headers: {
+    //                 Authorization: `Bearer ${token}`,
+    //                 "Content-Type": "application/json"
+    //             },
+    //         }
+    //     );
+
+    //     const data = await response.json();
+
+    //     dispatch((setFriendsObjects({
+    //         friendsObjects: data
+    //     })));
+
+    // }
+
+    const getTasks = () => {
+        
+    }
 
     useEffect(() => {
         //setTimeStamp(new Date().getTime());
@@ -54,23 +84,27 @@ const HomeScene = () => {
                 longitude: loc.coords.longitude
             });
         })();
+
+        // getFriends();
     }, [userPictureFile]);
 
     return (
         <View style={styles.mainContainer}>
-            {/* <View style={styles.friendListContainer}>
+
+            <View style={styles.friendListContainer}>
+
                 <Image
                     style={styles.friendListProfileImage}
                     source={{ uri: userPictureFileWTimestamp }}>
                 </Image>
-                <FlatList
+                {/* <FlatList
                     data={friends}
                     renderItem={({item}) => <Item></Item>}
                     
                 >
 
-                </FlatList>
-            </View> */}
+                </FlatList> */}
+            </View>
             <MapView
                 style={styles.mapContainer}
                 provider={PROVIDER_GOOGLE}
@@ -94,7 +128,19 @@ const HomeScene = () => {
                         </View>
                     </Marker>
                 }
+
             </MapView>
+
+            <Pressable
+                onPress={getTasks()}
+            >
+                <View style={styles.floatingButtonContainer}>
+                <Icon name="user-plus" size={30} color="#999" />
+
+                
+                </View>
+
+            </Pressable>
         </View>
     );
 }

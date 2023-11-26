@@ -14,6 +14,7 @@ import EditImageScene from './Scenes/SettingsScene/EditImageScene';
 import SearchFriend from './Scenes/SettingsScene/SearchFriend';
 import ViewProfileScene from './Scenes/ViewProfileScene/ViewProfileScene';
 import FriendRequest from './Scenes/SettingsScene/FriendRequest';
+import CreateTask from './Scenes/CreatePost/CreatePostScene';
 
 import { store } from './/State/store.js';
 import { Provider } from 'react-redux';
@@ -37,7 +38,7 @@ export default function App() {
                       options={{
                         tabBarButton: ()=>null,
                         tabBarVisible: false,
-                        unmountOnBlur: true,
+                        //unmountOnBlur: true,
                       }}
                       // listeners={({navigation}) => ({
                       //   blur: () => navigation.setParams({ screen: undefined })
@@ -63,6 +64,8 @@ export default function App() {
           />
           <Tab.Screen name="Friend Requests" component={FriendRequest}
 
+          />
+          <Tab.Screen name="Create Task" component={ CreateTask }
           />
 
         </Tab.Navigator>

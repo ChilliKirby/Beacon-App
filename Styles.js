@@ -81,7 +81,8 @@ export default styles = StyleSheet.create({
         padding: 10,
     },
     editTextContainer: {
-        height: '40%',
+        // height: '40%',
+        flex: 1,
         width: '60%',
         margin: 10,
         borderColor: GOLDENYELLOW,
@@ -143,6 +144,16 @@ export default styles = StyleSheet.create({
     height: "100%",
     width: '90%',
     backgroundColor: '#555',
+   },
+   floatingButtonContainer: {
+    position: 'absolute',
+    bottom: 20,
+    right: 20,
+    backgroundColor: GOLDENYELLOW,
+    width: 60,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'center',
    },
 
     /*Text*////////////////////////////////////////////////////

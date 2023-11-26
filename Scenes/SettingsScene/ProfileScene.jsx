@@ -19,13 +19,6 @@ const ProfileScene = ({ navigation }) => {
 
     const getFriends = async () => {
 
-        console.log("55555555555555555555555555555555");
-        console.log("token before getfriends is " + nickName);
-        console.log("token before getfriends is " + id);
-        console.log("token before getfriends is " + token);
-        console.log("token before getfriends is " + friendsObjects);
-
-        // if(refresh){
         const response = await fetch(`http://192.168.86.123:3001/users/${id}/friends`,
             
             {
@@ -38,20 +31,11 @@ const ProfileScene = ({ navigation }) => {
         );
 
         const data = await response.json();
-        console.log("jklkjkljj");
-        console.log(nickName);
-        console.log("ppppppppp");
-        //console.log(data);
+       
         dispatch((setFriendsObjects({
             friendsObjects: data
         })));
-        //setRefresh(false);//
-        // setFriends(data);
-        // console.log(friends);
-    // } else{
-
-    // }
-        //setFriends(data);
+      
     }
 
     const Item = ({ nickName, pictureFile, friendId }) => (
