@@ -2,6 +2,7 @@ import { View, Text, TextInput, ScrollView, Pressable, Button } from 'react-nati
 import { string, date, object } from 'yup';
 import { Formik, Form, Field } from 'formik';
 //import DatePicker from 'react-native-date-picker'
+import DateTimePicker from '@react-native-community/datetimepicker';
 import { useState } from 'react';
 
 import styles from '../../Styles.js';
@@ -14,6 +15,8 @@ import { useSelector } from 'react-redux';
 const CreatePost = (navigation) => {
 
     const [date, setDate] = useState(new Date())
+    const [mode, setMode] = useState('date');
+    const [show, setShow] = useState(false);
     const [open, setOpen] = useState(false)
 
     //const {user} = useContext(UserContext);
@@ -34,9 +37,29 @@ const CreatePost = (navigation) => {
         tTitle: string().required(),
         tDetails: string().required(),
         // tTime: date().required(),
+        tDate: string().required(),
         // tTaskPictureFile: string(),
 
     });
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate;
+        setShow(false);
+        setDate(currentDate);
+    };
+
+    const showMode = (currentMode) => {
+        setShow(true);
+        setMode(currentMode);
+    };
+
+    const showDatepicker = () => {
+        showMode('date');
+    };
+
+    const showTimepicker = () => {
+        showMode('time');
+    };
 
     const postTask = async (values, onSubmitProps) => {
 
@@ -78,6 +101,7 @@ const CreatePost = (navigation) => {
                     tTitle: '',
                     tDescription: '',
                     tTaskTime: '',
+                    tTaskDate: '',
                     //tTaskPictureFile: '',
                 }}
                 validationSchema={taskSchema}
@@ -92,6 +116,7 @@ const CreatePost = (navigation) => {
                             <View style={styles.editTextContainer}>
 
                                 <TextInput
+                                    style={styles.editTextInput}
                                     onChangeText={handleChange('tTitle')}
                                     onBlur={handleBlur('tTitle')}
                                     value={values.tTitle}
@@ -102,6 +127,7 @@ const CreatePost = (navigation) => {
                             <Text style={styles.mainText}>Task Details</Text>
                             <View style={styles.editTextContainer}>
                                 <TextInput
+                                    style={styles.editTextInput}
                                     onChangeText={handleChange('tDetails')}
                                     onBlur={handleBlur('tDetails')}
                                     value={values.tDetails}
@@ -112,6 +138,7 @@ const CreatePost = (navigation) => {
                             <Text style={styles.mainText}>Address</Text>
                             <View style={styles.editTextContainer}>
                                 <TextInput
+                                    style={styles.editTextInput}
                                     onChangeText={handleChange('tStreetAddress')}
                                     onBlur={handleBlur('tStreetAddress')}
                                     value={values.tStreetAddress}
@@ -122,6 +149,7 @@ const CreatePost = (navigation) => {
                             <Text style={styles.mainText}>City</Text>
                             <View style={styles.editTextContainer}>
                                 <TextInput
+                                    style={styles.editTextInput}
                                     onChangeText={handleChange('tCity')}
                                     onBlur={handleBlur('tCity')}
                                     value={values.tCity}
@@ -132,6 +160,7 @@ const CreatePost = (navigation) => {
                             <Text style={styles.mainText}>State</Text>
                             <View style={styles.editTextContainer}>
                                 <TextInput
+                                    style={styles.editTextInput}
                                     onChangeText={handleChange('tState')}
                                     onBlur={handleBlur('tState')}
                                     value={values.tState}
@@ -142,6 +171,7 @@ const CreatePost = (navigation) => {
                             <Text style={styles.mainText}>Zip</Text>
                             <View style={styles.editTextContainer}>
                                 <TextInput
+                                    style={styles.editTextInput}
                                     onChangeText={handleChange('tZip')}
                                     onBlur={handleBlur('tZip')}
                                     value={values.tZip}
@@ -149,17 +179,66 @@ const CreatePost = (navigation) => {
                                 />
                             </View>
 
+                            <Text style={styles.mainText}>Task Date</Text>
+                            <View style={styles.editTextContainer}>
+                                {/* <TextInput
+                                    style={styles.editTextInput} */}
+                                <Pressable
+                                    onPress={showDatepicker}
+                                    width='100%'
+                                >
+                                    <Text style={styles.editTextInput}
+                                        // onChangeText={handleChange(date.toLocaleDateString())}
+                                        // onBlur={handleBlur('tDate')}
+                                        // value={date.toLocaleDateString()}
+                                    >
+                                        { date.toLocaleDateString() }
+                                    </Text>
+                                </Pressable>
+                                {/* /> */}
+                            </View>
+                            {show && (
+                                <DateTimePicker
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={mode}
+                                    is24Hour={true}
+                                    onChange={onChange}
+                                />
+                            )}
+
                             <Text style={styles.mainText}>Task Time</Text>
                             <View style={styles.editTextContainer}>
-                                <TextInput
+                                {/* <TextInput
+                                    style={styles.editTextInput}
                                     onChangeText={handleChange('tTime')}
                                     onBlur={handleBlur('tTime')}
                                     value={values.tTime}
 
-                                />
+                                /> */}
+                                 <Pressable
+                                    onPress={showTimepicker}
+                                    width='100%'
+                                >
+                                    <Text style={styles.editTextInput}
+                                        // onChangeText={handleChange(date.toLocaleDateString())}
+                                        // onBlur={handleBlur('tDate')}
+                                        // value={date.toLocaleDateString()}
+                                    >
+                                        { date.toLocaleTimeString() }
+                                    </Text>
+                                </Pressable>
                             </View>
-
-
+                            {show && (
+                                <DateTimePicker
+                                    testID="dateTimePicker"
+                                    value={date}
+                                    mode={mode}
+                                    is24Hour={true}
+                                    onChange={onChange}
+                                />
+                            )}
+                           
                             {/* Display validation error if present */}
 
                             <Pressable
@@ -168,6 +247,7 @@ const CreatePost = (navigation) => {
                             >
                                 <Text>Submit</Text>
                             </Pressable>
+
 
                             {/* Add more TextInput components for other fields */}
 

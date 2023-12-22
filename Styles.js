@@ -167,6 +167,7 @@ export default styles = StyleSheet.create({
         alignSelf: 'center',
         
     },
+    
     largeMainTextLeft: {
         fontSize: 35,
         color: "#fff",
@@ -201,6 +202,13 @@ export default styles = StyleSheet.create({
         
         borderBottomColor: '#ffffff',
         borderBottomWidth: 3,
+        color: '#ffffff',
+    },
+    editTextInput:{
+        fontWeight: 'bold',
+        fontSize: 22,
+        width: '100%',
+        padding: 10,
         color: '#ffffff',
     },
     flatListItemText: {
