@@ -14,10 +14,11 @@ import { useSelector } from 'react-redux';
 
 const CreatePost = (navigation) => {
 
-    const [date, setDate] = useState(new Date())
-    const [mode, setMode] = useState('date');
+    const [date, setDate] = useState(new Date());
+    const [showDatePicker, setShowDatePicker] = useState(false);
+    const [showTimePicker, setShowTimePicker] = useState(false);
     const [show, setShow] = useState(false);
-    const [open, setOpen] = useState(false)
+    //const [open, setOpen] = useState(false)
 
     //const {user} = useContext(UserContext);
     const nickName = useSelector((state) => state.user.nickName);
@@ -42,23 +43,21 @@ const CreatePost = (navigation) => {
 
     });
 
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate;
-        setShow(false);
-        setDate(currentDate);
-    };
-
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
-
     const showDatepicker = () => {
-        showMode('date');
+        setShowDatePicker(true);
+        setShowTimePicker(false);
     };
 
     const showTimepicker = () => {
-        showMode('time');
+        setShowTimePicker(true);
+        setShowDatePicker(false);
+    };
+
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShowDatePicker(Platform.OS === 'ios');
+        setShowTimePicker(false);
+        setDate(currentDate);
     };
 
     const postTask = async (values, onSubmitProps) => {
@@ -188,22 +187,23 @@ const CreatePost = (navigation) => {
                                     width='100%'
                                 >
                                     <Text style={styles.editTextInput}
-                                        // onChangeText={handleChange(date.toLocaleDateString())}
-                                        // onBlur={handleBlur('tDate')}
-                                        // value={date.toLocaleDateString()}
+                                    // onChangeText={handleChange(date.toLocaleDateString())}
+                                    // onBlur={handleBlur('tDate')}
+                                    // value={date.toLocaleDateString()}
                                     >
-                                        { date.toLocaleDateString() }
+                                        {date.toLocaleDateString()}
                                     </Text>
                                 </Pressable>
                                 {/* /> */}
                             </View>
-                            {show && (
+                            {showDatePicker && (
                                 <DateTimePicker
                                     testID="dateTimePicker"
                                     value={date}
-                                    mode={mode}
+                                    mode="date"
                                     is24Hour={true}
                                     onChange={onChange}
+                                    display='default'
                                 />
                             )}
 
@@ -216,29 +216,30 @@ const CreatePost = (navigation) => {
                                     value={values.tTime}
 
                                 /> */}
-                                 <Pressable
+                                <Pressable
                                     onPress={showTimepicker}
                                     width='100%'
                                 >
                                     <Text style={styles.editTextInput}
-                                        // onChangeText={handleChange(date.toLocaleDateString())}
-                                        // onBlur={handleBlur('tDate')}
-                                        // value={date.toLocaleDateString()}
+                                    // onChangeText={handleChange(date.toLocaleDateString())}
+                                    // onBlur={handleBlur('tDate')}
+                                    // value={date.toLocaleDateString()}
                                     >
-                                        { date.toLocaleTimeString() }
+                                        {date.toLocaleTimeString()}
                                     </Text>
                                 </Pressable>
                             </View>
-                            {show && (
+                            {showTimePicker && (
                                 <DateTimePicker
-                                    testID="dateTimePicker"
+                                    testID="timePicker"
                                     value={date}
-                                    mode={mode}
+                                    mode="time"
                                     is24Hour={true}
                                     onChange={onChange}
+                                    display='default'
                                 />
                             )}
-                           
+
                             {/* Display validation error if present */}
 
                             <Pressable
