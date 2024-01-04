@@ -26,22 +26,22 @@ const CreatePost = (navigation) => {
     const token = useSelector((state) => state.user.token);
     const pictureFile = useSelector((state) => state.user.pictureFile);
 
-    const taskSchema = object().shape({
-        tUserId: string().required(),
-        tUserNickName: string().required(),
-        tUserPictureFile: string().required(),
-        tLocation: string().required(),
-        tStreetAddress: string().required(),
-        tCity: string().required(),
-        tState: string().required(),
-        tZip: string().required(),
-        tTitle: string().required(),
-        tDetails: string().required(),
-        // tTime: date().required(),
-        tDate: string().required(),
-        // tTaskPictureFile: string(),
+    // const taskSchema = object().shape({
+    //     tUserId: string().required(),
+    //     tUserNickName: string().required(),
+    //     tUserPictureFile: string().required(),
+    //     tLocation: string().required(),
+    //     tStreetAddress: string().required(),
+    //     tCity: string().required(),
+    //     tState: string().required(),
+    //     tZip: string().required(),
+    //     tTitle: string().required(),
+    //     tDetails: string().required(),
+    //     // tTime: date().required(),
+    //     tDate: string().required(),
+    //     // tTaskPictureFile: string(),
 
-    });
+    // });
 
     const showDatepicker = () => {
         setShowDatePicker(true);
@@ -103,14 +103,47 @@ const CreatePost = (navigation) => {
                     tTaskDate: '',
                     //tTaskPictureFile: '',
                 }}
-                validationSchema={taskSchema}
-                onSubmit={postTask}
+                //validationSchema={taskSchema}
+                
+                onSubmit={(values) => {
+                    postTask
+                }}
+
+                validate={(values) => {
+                    const errors = {};
+                    
+                    if(!values.tTitle){
+                        errors.tTitle = 'Required';
+                    }
+                    if(!values.tDetails){
+                        errors.tDetails = 'Required';
+                    }
+                    if(!values.tStreetAddress){
+                        errors.tStreetAddress = 'Required';
+                    }
+                    if(!values.tCity){
+                        errors.tCity = 'Required';
+                    }
+                    if(!values.tState){
+                        errors.tState = 'Required';
+                    }
+                    if(!values.tZip){
+                        errors.tZip = 'Required';
+                    }
+                    if(!values.tTaskDate){
+                        errors.tTaskDate = 'Required';
+                    }
+                    if(!values.tTaskTime){
+                        errors.tTaskTime = 'Required';
+                    }
+                    return errors;
+                }}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <View style={styles.mainContainer}>
                         <ScrollView style={{ flex: 1 }}>
 
-                            {/* Email input field */}
+                            {/* Title input field */}
                             <Text style={styles.mainText}>Task Title</Text>
                             <View style={styles.editTextContainer}>
 
@@ -122,6 +155,7 @@ const CreatePost = (navigation) => {
 
                                 />
                             </View>
+                            {errors.tTitle && <Text style={styles.mainText}>{errors.tTitle}</Text>}
 
                             <Text style={styles.mainText}>Task Details</Text>
                             <View style={styles.editTextContainer}>
@@ -133,6 +167,7 @@ const CreatePost = (navigation) => {
 
                                 />
                             </View>
+                            {errors.tDetails && <Text style={styles.mainText}>{errors.tDetails}</Text>}
 
                             <Text style={styles.mainText}>Address</Text>
                             <View style={styles.editTextContainer}>
@@ -144,6 +179,7 @@ const CreatePost = (navigation) => {
 
                                 />
                             </View>
+                            {errors.tStreetAddress && <Text style={styles.mainText}>{errors.tStreetAddress}</Text>}
 
                             <Text style={styles.mainText}>City</Text>
                             <View style={styles.editTextContainer}>
@@ -155,6 +191,7 @@ const CreatePost = (navigation) => {
 
                                 />
                             </View>
+                            {errors.tCity && <Text style={styles.mainText}>{errors.tCity}</Text>}
 
                             <Text style={styles.mainText}>State</Text>
                             <View style={styles.editTextContainer}>
@@ -166,6 +203,7 @@ const CreatePost = (navigation) => {
 
                                 />
                             </View>
+                            {errors.tState && <Text style={styles.mainText}>{errors.tState}</Text>}
 
                             <Text style={styles.mainText}>Zip</Text>
                             <View style={styles.editTextContainer}>
@@ -177,6 +215,7 @@ const CreatePost = (navigation) => {
 
                                 />
                             </View>
+                            {errors.tZip && <Text style={styles.mainText}>{errors.tZip}</Text>}
 
                             <Text style={styles.mainText}>Task Date</Text>
                             <View style={styles.editTextContainer}>
@@ -206,6 +245,7 @@ const CreatePost = (navigation) => {
                                     display='default'
                                 />
                             )}
+                            {errors.tTaskDate && <Text style={styles.mainText}>{errors.tTaskDate}</Text>}
 
                             <Text style={styles.mainText}>Task Time</Text>
                             <View style={styles.editTextContainer}>
@@ -239,11 +279,12 @@ const CreatePost = (navigation) => {
                                     display='default'
                                 />
                             )}
+                            {errors.tTaskTime && <Text style={styles.mainText}>{errors.tTaskTime}</Text>}
 
                             {/* Display validation error if present */}
 
                             <Pressable
-                                onPress={() => postTask(values)
+                                onPress={handleSubmit
                                 }
                             >
                                 <Text>Submit</Text>
