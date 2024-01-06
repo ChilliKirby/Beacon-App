@@ -85,6 +85,35 @@ const CreatePost = (navigation) => {
 
         // });
 
+        try{
+
+            const formData = new FormData();
+            formData.append('nickName', nickName);
+            formData.append('id', id);
+            formData.append('token', token);
+            formData.append('pictureFile', pictureFile);
+            formData.append('tStreetAddress', tStreetAddress);
+            formData.append('tCity', tCity);
+            formData.append('tState', tState);
+            formData.append('tZip', tZip);
+            formData.append('tTitle', tTitle);
+            formData.append('tDescription', tDescription);
+            formData.append('tTaskTime', tTaskTime);
+            formData.append('tTaskDate', tTaskDate);
+
+            const response = await fetch(`http://192.168.86.123:3001`,
+            {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json"
+                },
+                body: formData
+            });
+        } catch(error){
+
+        }
+
 
     }
 
