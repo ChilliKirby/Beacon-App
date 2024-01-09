@@ -65,6 +65,7 @@ const CreatePost = (navigation) => {
         values.tUserNickName = nickName;
         values.tUserPictureFile = pictureFile;
         values.tUserId = id;
+        console.log("ass");
         console.log(values);
 
         // try{
@@ -75,15 +76,15 @@ const CreatePost = (navigation) => {
         //     return;
         // }
 
-        // const response = await fetch(`http://192.168.86.123:3001`,
-        // {
-        //     method: 'POST',
-        //     headers: {
-        //         Authorization: `Bearer ${token}`,
-        //         "Content-Type": "application/json"
-        //     },
+        const response = await fetch(`http://192.168.86.123:3001/posts/postTask`,
+        {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json"
+            },
 
-        // });
+        });
 
         try{
 
@@ -92,26 +93,26 @@ const CreatePost = (navigation) => {
             formData.append('id', id);
             formData.append('token', token);
             formData.append('pictureFile', pictureFile);
-            formData.append('tStreetAddress', tStreetAddress);
-            formData.append('tCity', tCity);
-            formData.append('tState', tState);
-            formData.append('tZip', tZip);
-            formData.append('tTitle', tTitle);
-            formData.append('tDescription', tDescription);
-            formData.append('tTaskTime', tTaskTime);
-            formData.append('tTaskDate', tTaskDate);
+            formData.append('tStreetAddress', values.tStreetAddress);
+            formData.append('tCity', values.tCity);
+            formData.append('tState', values.tState);
+            formData.append('tZip', values.tZip);
+            formData.append('tTitle', values.tTitle);
+            formData.append('tDescription', values.tDescription);
+            formData.append('tTaskTime', values.tTaskTime);
+            formData.append('tTaskDate', values.tTaskDate);
 
-            const response = await fetch(`http://192.168.86.123:3001`,
-            {
-                method: 'POST',
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                    "Content-Type": "application/json"
-                },
-                body: formData
-            });
+            // const response = await fetch(`http://192.168.86.123:3001/${tUserId}/postTask`,
+            // {
+            //     method: 'POST',
+            //     headers: {
+            //         Authorization: `Bearer ${token}`,
+            //         "Content-Type": "application/json"
+            //     },
+            //     body: formData
+            // });
         } catch(error){
-
+            console.log(error);
         }
 
 
@@ -128,14 +129,15 @@ const CreatePost = (navigation) => {
                     tZip: '',
                     tTitle: '',
                     tDescription: '',
-                    tTaskTime: '',
+                    tTaskTime: date,
                     tTaskDate: '',
                     //tTaskPictureFile: '',
                 }}
                 //validationSchema={taskSchema}
                 
                 onSubmit={(values) => {
-                    postTask
+                    postTask(values);
+                    
                 }}
 
                 validate={(values) => {
@@ -159,12 +161,12 @@ const CreatePost = (navigation) => {
                     if(!values.tZip){
                         errors.tZip = 'Required';
                     }
-                    if(!values.tTaskDate){
-                        errors.tTaskDate = 'Required';
-                    }
-                    if(!values.tTaskTime){
-                        errors.tTaskTime = 'Required';
-                    }
+                    // if(!values.tTaskDate){
+                    //     errors.tTaskDate = 'Required';
+                    // }
+                    // if(!values.tTaskTime){
+                    //     errors.tTaskTime = 'Required';
+                    // }
                     return errors;
                 }}
             >
@@ -305,7 +307,7 @@ const CreatePost = (navigation) => {
                                     mode="time"
                                     is24Hour={true}
                                     onChange={onChange}
-                                    display='default'
+                                    
                                 />
                             )}
                             {errors.tTaskTime && <Text style={styles.mainText}>{errors.tTaskTime}</Text>}
@@ -313,7 +315,8 @@ const CreatePost = (navigation) => {
                             {/* Display validation error if present */}
 
                             <Pressable
-                                onPress={handleSubmit
+                                onPress={
+                                    handleSubmit
                                 }
                             >
                                 <Text>Submit</Text>
@@ -344,7 +347,7 @@ const CreatePost = (navigation) => {
                     setOpen(false)
                 }}
             /> */}
-            <Button title="Open" onPress={() => setOpen(true)} />
+            
         </View>
     )
 }
