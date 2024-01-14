@@ -3,12 +3,13 @@ import { string, date, object } from 'yup';
 import { Formik, Form, Field } from 'formik';
 //import DatePicker from 'react-native-date-picker'
 import DateTimePicker from '@react-native-community/datetimepicker';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from '../../Styles.js';
 import { useSelector } from 'react-redux';
 // import { UserContext } from '../../UserContext.js';
 // import { useContext } from 'react';
+import * as ImagePicker from 'expo-image-picker';
 
 
 
@@ -19,6 +20,12 @@ const CreatePost = (navigation) => {
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [show, setShow] = useState(false);
     //const [open, setOpen] = useState(false)
+
+    const userImage = useSelector((state) => state.user.pictureFile);
+    const [image, setImage] = useState(userImage);
+    const [uri, setUri] = useState(null);
+    const [type, setType] = useState(null);
+    const [name, setName] = useState(null);
 
     //const {user} = useContext(UserContext);
     const nickName = useSelector((state) => state.user.nickName);
@@ -60,6 +67,35 @@ const CreatePost = (navigation) => {
         setDate(currentDate);
     };
 
+    const pickImage = async () => {
+        let result = await ImagePicker.launchImageLibraryAsync({
+            mediaTypes: ImagePicker.MediaTypeOptions.Images,
+            allowsEditing: true,
+            aspect: [2, 2],
+            quality: 1,
+
+        });
+
+        //console.log(result);
+
+        if (!result.canceled) {
+
+            setImage(result.assets[0].uri);
+            setUri(result.assets[0].uri);
+
+
+            const uriArray = result.assets[0].uri.split(".");
+            const fileExtension = uriArray[uriArray.length - 1];
+
+            setType(result.assets[0].type + "/" + fileExtension);
+            //setName(result.assets[0].fileName);
+        }
+    };
+
+    useEffect(() => {
+        pickImage();
+    }, []);
+
     const postTask = async (values, onSubmitProps) => {
 
         values.tUserNickName = nickName;
@@ -68,6 +104,8 @@ const CreatePost = (navigation) => {
         console.log("ass");
         console.log(values);
 
+       
+
         // try{
         //     taskSchema.validateSync(values, { abortEarly: false })
         //     console.log("yes");
@@ -75,22 +113,28 @@ const CreatePost = (navigation) => {
         //     console.log(error);
         //     return;
         // }
+        // const response = await fetch(`http://192.168.86.123:3001/posts/postTask`,
+        // {
+        //     method: 'POST',
+        //     headers: {
+        //         Authorization: `Bearer ${token}`,
+        //         "Content-Type": "application/json"
+        //     },
 
-        const response = await fetch(`http://192.168.86.123:3001/posts/postTask`,
-        {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${token}`,
-                "Content-Type": "application/json"
-            },
+        // });
 
-        });
+       
 
-        try{
+        try {
 
             const formData = new FormData();
-            formData.append('nickName', nickName);
-            formData.append('id', id);
+            formData.append('file', {
+                uri: uri,
+                type: type,
+                name: id + "_" + "profile" + "_" + "image" + ".jpg",
+            });
+             formData.append('nickName', nickName);
+            formData.append('userId', id);
             formData.append('token', token);
             formData.append('pictureFile', pictureFile);
             formData.append('tStreetAddress', values.tStreetAddress);
@@ -99,20 +143,51 @@ const CreatePost = (navigation) => {
             formData.append('tZip', values.tZip);
             formData.append('tTitle', values.tTitle);
             formData.append('tDescription', values.tDescription);
-            formData.append('tTaskTime', values.tTaskTime);
-            formData.append('tTaskDate', values.tTaskDate);
+            formData.append('tTaskTime', values.tTaskTime.toLocaleTimeString());
+             formData.append('tTaskDate', values.tTaskDate);
 
-            // const response = await fetch(`http://192.168.86.123:3001/${tUserId}/postTask`,
-            // {
-            //     method: 'POST',
-            //     headers: {
-            //         Authorization: `Bearer ${token}`,
-            //         "Content-Type": "application/json"
-            //     },
-            //     body: formData
-            // });
-        } catch(error){
-            console.log(error);
+            console.log("222");
+            console.log(values.tTaskTime);
+
+            const response = await fetch(`http://192.168.86.123:3001/posts/postTask`,
+                {
+                    method: "PATCH",
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                        //"Content-Type": "multipart/form-data",
+                        //"Content-Type": "multipart/form-data",
+                        //"Content-Type": "application/json"
+                    },
+                    body: formData
+                }
+            )
+                                          
+        //     const response = await fetch(`http://192.168.86.123:3001/posts/postTask`,
+        //     {
+        //         method: "POST",
+        //         headers: {
+        //             Authorization: `Bearer ${token}`,
+        //             "Content-Type": "application/json"
+        //         },
+
+        //     }
+        // )
+            
+           
+
+            const results = await response.json();
+            console.log("look   ", results);
+            //setDataResults(results);
+
+           
+
+
+            //console.log(data.url);
+
+            //const data = await response.json();
+            //console.log(response);
+        } catch (error) {
+            console.log(error.message);
         }
 
 
@@ -134,41 +209,41 @@ const CreatePost = (navigation) => {
                     //tTaskPictureFile: '',
                 }}
                 //validationSchema={taskSchema}
-                
+
                 onSubmit={(values) => {
                     postTask(values);
-                    
+
                 }}
 
-                validate={(values) => {
-                    const errors = {};
-                    
-                    if(!values.tTitle){
-                        errors.tTitle = 'Required';
-                    }
-                    if(!values.tDetails){
-                        errors.tDetails = 'Required';
-                    }
-                    if(!values.tStreetAddress){
-                        errors.tStreetAddress = 'Required';
-                    }
-                    if(!values.tCity){
-                        errors.tCity = 'Required';
-                    }
-                    if(!values.tState){
-                        errors.tState = 'Required';
-                    }
-                    if(!values.tZip){
-                        errors.tZip = 'Required';
-                    }
-                    // if(!values.tTaskDate){
-                    //     errors.tTaskDate = 'Required';
-                    // }
-                    // if(!values.tTaskTime){
-                    //     errors.tTaskTime = 'Required';
-                    // }
-                    return errors;
-                }}
+                // validate={(values) => {
+                //     const errors = {};
+
+                //     if (!values.tTitle) {
+                //         errors.tTitle = 'Required';
+                //     }
+                //     if (!values.tDescription) {
+                //         errors.tDetails = 'Required';
+                //     }
+                //     if (!values.tStreetAddress) {
+                //         errors.tStreetAddress = 'Required';
+                //     }
+                //     if (!values.tCity) {
+                //         errors.tCity = 'Required';
+                //     }
+                //     if (!values.tState) {
+                //         errors.tState = 'Required';
+                //     }
+                //     if (!values.tZip) {
+                //         errors.tZip = 'Required';
+                //     }
+                //     // if(!values.tTaskDate){
+                //     //     errors.tTaskDate = 'Required';
+                //     // }
+                //     // if(!values.tTaskTime){
+                //     //     errors.tTaskTime = 'Required';
+                //     // }
+                //     return errors;
+                // }}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <View style={styles.mainContainer}>
@@ -192,8 +267,8 @@ const CreatePost = (navigation) => {
                             <View style={styles.editTextContainer}>
                                 <TextInput
                                     style={styles.editTextInput}
-                                    onChangeText={handleChange('tDetails')}
-                                    onBlur={handleBlur('tDetails')}
+                                    onChangeText={handleChange('tDescription')}
+                                    onBlur={handleBlur('tDescription')}
                                     value={values.tDetails}
 
                                 />
@@ -307,7 +382,7 @@ const CreatePost = (navigation) => {
                                     mode="time"
                                     is24Hour={true}
                                     onChange={onChange}
-                                    
+
                                 />
                             )}
                             {errors.tTaskTime && <Text style={styles.mainText}>{errors.tTaskTime}</Text>}
@@ -347,7 +422,7 @@ const CreatePost = (navigation) => {
                     setOpen(false)
                 }}
             /> */}
-            
+
         </View>
     )
 }

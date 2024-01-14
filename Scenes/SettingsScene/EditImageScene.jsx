@@ -121,7 +121,7 @@ const EditImageScene = () => {
                 </Pressable>
 
             </View>
-            <Text style={styles.largeMainText}>
+            {/* <Text style={styles.largeMainText}>
                 Select Image
             </Text>
 
@@ -133,7 +133,7 @@ const EditImageScene = () => {
             </Text>
             <Text style={styles.largeMainText}>
                 {type}
-            </Text>
+            </Text> */}
         </View>
     )
 };
