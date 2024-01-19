@@ -16,6 +16,7 @@ import * as ImagePicker from 'expo-image-picker';
 const CreatePost = (navigation) => {
 
     const [date, setDate] = useState(new Date());
+    const [minDate] = useState(new Date('2022-01-15')); //minimum allowed date for new task
     const [showDatePicker, setShowDatePicker] = useState(false);
     const [showTimePicker, setShowTimePicker] = useState(false);
     const [show, setShow] = useState(false);
@@ -64,7 +65,13 @@ const CreatePost = (navigation) => {
         const currentDate = selectedDate || date;
         setShowDatePicker(Platform.OS === 'ios');
         setShowTimePicker(false);
+
+        if(currentDate <=
+             minDate){
+
+        } else{
         setDate(currentDate);
+        }
     };
 
     const pickImage = async () => {
@@ -143,8 +150,8 @@ const CreatePost = (navigation) => {
             formData.append('tZip', values.tZip);
             formData.append('tTitle', values.tTitle);
             formData.append('tDescription', values.tDescription);
-            formData.append('tTaskTime', values.tTaskTime.toLocaleTimeString());
-             formData.append('tTaskDate', values.tTaskDate);
+            formData.append('tTaskTime', date.toISOString());
+             formData.append('tTaskDate', date.toISOString());
 
             console.log("222");
             console.log(values.tTaskTime);
@@ -215,35 +222,35 @@ const CreatePost = (navigation) => {
 
                 }}
 
-                // validate={(values) => {
-                //     const errors = {};
+                validate={(values) => {
+                    const errors = {};
 
-                //     if (!values.tTitle) {
-                //         errors.tTitle = 'Required';
-                //     }
-                //     if (!values.tDescription) {
-                //         errors.tDetails = 'Required';
-                //     }
-                //     if (!values.tStreetAddress) {
-                //         errors.tStreetAddress = 'Required';
-                //     }
-                //     if (!values.tCity) {
-                //         errors.tCity = 'Required';
-                //     }
-                //     if (!values.tState) {
-                //         errors.tState = 'Required';
-                //     }
-                //     if (!values.tZip) {
-                //         errors.tZip = 'Required';
-                //     }
-                //     // if(!values.tTaskDate){
-                //     //     errors.tTaskDate = 'Required';
-                //     // }
-                //     // if(!values.tTaskTime){
-                //     //     errors.tTaskTime = 'Required';
-                //     // }
-                //     return errors;
-                // }}
+                    if (!values.tTitle) {
+                        errors.tTitle = 'Required';
+                    }
+                    if (!values.tDescription) {
+                        errors.tDetails = 'Required';
+                    }
+                    if (!values.tStreetAddress) {
+                        errors.tStreetAddress = 'Required';
+                    }
+                    if (!values.tCity) {
+                        errors.tCity = 'Required';
+                    }
+                    if (!values.tState) {
+                        errors.tState = 'Required';
+                    }
+                    if (!values.tZip) {
+                        errors.tZip = 'Required';
+                    }
+                    // if(!values.tTaskDate){
+                    //     errors.tTaskDate = 'Required';
+                    // }
+                    // if(!values.tTaskTime){
+                    //     errors.tTaskTime = 'Required';
+                    // }
+                    return errors;
+                }}
             >
                 {({ handleChange, handleBlur, handleSubmit, values, errors }) => (
                     <View style={styles.mainContainer}>
