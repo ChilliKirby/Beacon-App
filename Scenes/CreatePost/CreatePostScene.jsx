@@ -10,6 +10,8 @@ import { useSelector } from 'react-redux';
 // import { UserContext } from '../../UserContext.js';
 // import { useContext } from 'react';
 import * as ImagePicker from 'expo-image-picker';
+//import { GOOGLE_API_KEY } from 'react-native-dotenv';
+import axios from "axios";
 
 
 
@@ -66,11 +68,11 @@ const CreatePost = (navigation) => {
         setShowDatePicker(Platform.OS === 'ios');
         setShowTimePicker(false);
 
-        if(currentDate <=
-             minDate){
+        if (currentDate <=
+            minDate) {
 
-        } else{
-        setDate(currentDate);
+        } else {
+            setDate(currentDate);
         }
     };
 
@@ -103,6 +105,71 @@ const CreatePost = (navigation) => {
         pickImage();
     }, []);
 
+    const createTask = async (values, onSubmitProps) => {
+        //await getGeocode(values);
+        await postTask(values, onSubmitProps);
+    }
+
+    const getGeocode = async (values) => {
+
+        const apiKey = "AIzaSyCznWJJQKfkqFjzgiNdFQOvCFPbdduRfls";
+        const address = `${values.tStreetAddress}, ${values.tCity}, ${values.tState}, ${values.tZip}`;
+        const address1 = "1600 Amphitheatre Parkway, Mountain View, CA";
+        console.log("api key is " + process.env.EXPO_PUBLIC_GOOGLE_API_KEY)
+
+        // const apiUrl = `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+        //     address1
+        // )}&key=${apiKey}`;
+
+        // // Make the fetch request
+        // fetch(apiUrl)
+        //     .then(response => {
+        //         if (!response.ok) {
+        //             throw new Error(`HTTP error! Status: ${response.status}`);
+        //         }
+                
+        //         return response.json();
+        //     })
+        //     .then(data => {
+        //         const results = data.results;
+        //         console.log("this is err " + data.error_message);
+        //         if (results && results.length > 0) {
+        //             const location = results[0].geometry.location;
+        //             console.log(`Latitude: ${location.lat}, Longitude: ${location.lng}`);
+        //         } else {
+        //             console.error('No results found.');
+        //         }
+        //     })
+        //     .catch(error => {
+        //         console.error('Error fetching geocoding data:', error.message);
+        //     });
+
+            try{
+            const response = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json`, {
+                params: {
+                    address: address1,
+                    key: "AIzaSyCznWJJQKfkqFjzgiNdFQOvCFPbdduRfls",
+                },        
+               
+                
+
+            });
+
+            console.log(response.status);
+            console.log("this is err " + response.data.error_message);
+            const result = response.data.results;
+            if (result && result.length > 0) {
+                const location = result[0].geometry.location;
+                console.log(`Latitude: ${location.lat}, Longitude: ${location.lng}`);
+            } else {
+                console.error('No results found.');
+            }
+        } catch(err){
+            console.log(err.message);
+        }
+
+    }
+
     const postTask = async (values, onSubmitProps) => {
 
         values.tUserNickName = nickName;
@@ -111,7 +178,7 @@ const CreatePost = (navigation) => {
         console.log("ass");
         console.log(values);
 
-       
+
 
         // try{
         //     taskSchema.validateSync(values, { abortEarly: false })
@@ -130,7 +197,7 @@ const CreatePost = (navigation) => {
 
         // });
 
-       
+
 
         try {
 
@@ -140,7 +207,7 @@ const CreatePost = (navigation) => {
                 type: type,
                 name: id + "_" + "profile" + "_" + "image" + ".jpg",
             });
-             formData.append('nickName', nickName);
+            formData.append('nickName', nickName);
             formData.append('userId', id);
             formData.append('token', token);
             formData.append('pictureFile', pictureFile);
@@ -151,7 +218,7 @@ const CreatePost = (navigation) => {
             formData.append('tTitle', values.tTitle);
             formData.append('tDescription', values.tDescription);
             formData.append('tTaskTime', date.toISOString());
-             formData.append('tTaskDate', date.toISOString());
+            formData.append('tTaskDate', date.toISOString());
 
             console.log("222");
             console.log(values.tTaskTime);
@@ -168,25 +235,25 @@ const CreatePost = (navigation) => {
                     body: formData
                 }
             )
-                                          
-        //     const response = await fetch(`http://192.168.86.123:3001/posts/postTask`,
-        //     {
-        //         method: "POST",
-        //         headers: {
-        //             Authorization: `Bearer ${token}`,
-        //             "Content-Type": "application/json"
-        //         },
 
-        //     }
-        // )
-            
-           
+            //     const response = await fetch(`http://192.168.86.123:3001/posts/postTask`,
+            //     {
+            //         method: "POST",
+            //         headers: {
+            //             Authorization: `Bearer ${token}`,
+            //             "Content-Type": "application/json"
+            //         },
+
+            //     }
+            // )
+
+
 
             const results = await response.json();
             console.log("look   ", results);
             //setDataResults(results);
 
-           
+
 
 
             //console.log(data.url);
@@ -218,7 +285,8 @@ const CreatePost = (navigation) => {
                 //validationSchema={taskSchema}
 
                 onSubmit={(values) => {
-                    postTask(values);
+                    //postTask(values);
+                    createTask(values);
 
                 }}
 
